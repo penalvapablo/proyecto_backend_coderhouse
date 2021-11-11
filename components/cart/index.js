@@ -9,24 +9,14 @@ const cartStorage = [];
 storage.read().then((data) => {
   data.forEach((cart) => {
     const {
-      name,
-      description,
-      code,
-      img,
-      price,
-      stock,
       id,
       timestamp,
+      products,
     } = cart;
-    const newProduct = inventory.addProduct(
-      name,
-      description,
-      code,
-      img,
-      price,
-      stock,
+    const newProduct = carts.createCart(
       id,
-      timestamp
+      timestamp,
+      products,
     );
     cartStorage.push(newProduct);
   });
@@ -58,7 +48,7 @@ module.exports = (app) => {
   router.get('/:id/products', (req, res)=>{
     const products = carts.listProducts( Number(req.params.id))
     if(products.length === 0){
-      return res.json({ error: 'este carrito no existe' });
+      return res.json({ error: 'este carrito está vacio' });
     }
     res.json(products)
   })

@@ -6,11 +6,11 @@ class Carts{
     this.carts=[]
     this.id = 1;
   }
-  createCart(){
+  createCart(id, timestamp, products){
     const newCart = {
-      id: this.id,
-      timestamp: moment(new Date()).format('DD/MM/YY HH:mm'),
-      products: []
+      id: id || this.id,
+      timestamp: timestamp || moment(new Date()).format('DD/MM/YY HH:mm'),
+      products: products || []
     }
     this.carts.push(newCart)
     this.id++
